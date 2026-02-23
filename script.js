@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const revealElements = document.querySelectorAll('[data-aos]');
-    
+
     // Fallback if AOS is not available
     if (typeof AOS === 'undefined') {
         const observer = new IntersectionObserver((entries) => {
@@ -56,4 +56,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    // Check local storage for preference
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'enabled') {
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    });
 });
+
+// Custom Language Selection for Google Translate
+function changeLanguage(lang) {
+    const selectField = document.querySelector("#google_translate_element select");
+    if (!selectField) return;
+
+    for (let i = 0; i < selectField.children.length; i++) {
+        const option = selectField.children[i];
+        if (option.value === lang) {
+            selectField.selectedIndex = i;
+            selectField.dispatchEvent(new Event('change'));
+            break;
+        }
+    }
+
+    // Update button text to reflect chosen language
+    const langBtnText = document.querySelector('.lang-btn');
+    if (lang === 'ko') langBtnText.innerHTML = '<i class="fas fa-globe"></i> KOR <i class="fas fa-chevron-down"></i>';
+    else if (lang === 'en') langBtnText.innerHTML = '<i class="fas fa-globe"></i> ENG <i class="fas fa-chevron-down"></i>';
+    else if (lang === 'zh-CN') langBtnText.innerHTML = '<i class="fas fa-globe"></i> CHN <i class="fas fa-chevron-down"></i>';
+    else if (lang === 'ja') langBtnText.innerHTML = '<i class="fas fa-globe"></i> JPN <i class="fas fa-chevron-down"></i>';
+}

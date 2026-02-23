@@ -17,6 +17,20 @@
     --shadow-hover: 0 12px 30px rgba(33, 70, 229, 0.15);
 }
 
+/* Dark Mode Overrides */
+body.dark-mode {
+    --bg-main: #121212;
+    --bg-surface: #1E1E1E;
+    --bg-card: #282828;
+    --text-main: #F5F5F5;
+    --text-muted: #A0A0A0;
+    --border-color: #333333;
+    --glass: rgba(18, 18, 18, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 12px 30px rgba(33, 70, 229, 0.25);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -190,6 +204,99 @@ h4 {
     color: var(--primary-color);
 }
 
+/* Nav Controls */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.lang-dropdown {
+    position: relative;
+}
+
+.lang-btn,
+.dark-mode-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#navbar.scrolled .lang-btn,
+#navbar.scrolled .dark-mode-btn {
+    color: var(--text-main);
+}
+
+.lang-btn:hover,
+.dark-mode-btn:hover {
+    color: var(--primary-color);
+}
+
+.lang-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-hover);
+    border-radius: 12px;
+    padding: 8px 0;
+    min-width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+    z-index: 1000;
+}
+
+.lang-dropdown:hover .lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lang-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.lang-menu a:hover {
+    background: rgba(33, 70, 229, 0.05);
+    color: var(--primary-color);
+}
+
+.dark-mode-btn {
+    font-size: 1.1rem;
+    padding: 6px;
+}
+
+/* Hide Google Translate Default UI */
+body {
+    top: 0 !important;
+}
+
+.skiptranslate iframe,
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+#goog-gt-tt {
+    display: none !important;
+}
+
 /* ============================
    Hero Section
    ============================ */
@@ -288,7 +395,7 @@ h4 {
     gap: 30px;
     margin-bottom: 40px;
     padding: 20px 32px;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--glass);
     backdrop-filter: blur(10px);
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -461,7 +568,7 @@ h2 {
     position: absolute;
     top: 16px;
     left: 16px;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--glass);
     color: var(--text-main);
     padding: 6px 14px;
     border-radius: 8px;
@@ -580,7 +687,7 @@ h2 {
     width: 60px;
     height: 60px;
     flex-shrink: 0;
-    background: #ffffff;
+    background: var(--bg-card);
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     border-radius: 16px;
@@ -620,7 +727,7 @@ h2 {
 .floating-badge-2 {
     position: absolute;
     left: -20px;
-    background: #ffffff;
+    background: var(--bg-card);
     color: var(--text-main);
     padding: 16px 24px;
     border-radius: 16px;
@@ -681,7 +788,7 @@ h2 {
 }
 
 .area-card {
-    background: #ffffff;
+    background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 40px 24px;
@@ -719,6 +826,105 @@ h2 {
 .area-card p {
     color: var(--text-muted);
     font-size: 0.9rem;
+}
+
+/* ============================
+   Reviews Section
+   ============================ */
+#reviews {
+    padding: 120px 0;
+    background: var(--bg-surface);
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.review-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 40px 30px;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-soft);
+}
+
+.review-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(33, 70, 229, 0.2);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.review-stars {
+    color: #ffb400;
+    /* Distinct orange/gold for stars */
+    font-size: 0.95rem;
+    display: flex;
+    gap: 4px;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.review-body {
+    flex: 1;
+}
+
+.review-body h4 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.review-body p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.review-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.review-author {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.review-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.review-link:hover {
+    color: var(--primary-dark);
 }
 
 /* ============================
@@ -797,7 +1003,7 @@ h2 {
    ============================ */
 footer {
     padding: 80px 0 40px;
-    background: #ffffff;
+    background: var(--bg-surface);
     border-top: 1px solid var(--border-color);
 }
 
@@ -926,7 +1132,7 @@ footer {
     color: var(--text-muted);
     text-align: right;
     letter-spacing: 0.5px;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--glass);
     padding: 4px 10px;
     border-radius: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -945,7 +1151,7 @@ footer {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     transition: var(--transition);
     position: relative;
-    background: #ffffff;
+    background: var(--bg-card);
 }
 
 .fab:hover {
@@ -958,7 +1164,7 @@ footer {
     right: 75px;
     top: 50%;
     transform: translateY(-50%);
-    background: #ffffff;
+    background: var(--bg-card);
     color: var(--text-main);
     padding: 8px 16px;
     border-radius: 8px;
