@@ -38,8 +38,22 @@
                 <li><a href="#gallery">운행구역</a></li>
                 <li><a href="#contact">예약문의</a></li>
             </ul>
-            <div class="nav-cta">
-                <a href="tel:01031594668" class="btn btn-primary small"><i class="fas fa-phone-alt"></i> 빠른 예약</a>
+            <div class="nav-controls">
+                <div class="lang-dropdown">
+                    <button class="lang-btn"><i class="fas fa-globe"></i> KOR <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="lang-menu">
+                        <a href="javascript:void(0)" onclick="changeLanguage('ko')">한국어</a>
+                        <a href="javascript:void(0)" onclick="changeLanguage('en')">English</a>
+                        <a href="javascript:void(0)" onclick="changeLanguage('zh-CN')">中文</a>
+                        <a href="javascript:void(0)" onclick="changeLanguage('ja')">日本語</a>
+                    </div>
+                </div>
+                <button id="dark-mode-toggle" class="dark-mode-btn" title="다크모드 전환">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="tel:01031594668" class="btn btn-primary small nav-book-btn"><i class="fas fa-phone-alt"></i> 빠른
+                    예약</a>
             </div>
         </div>
     </nav>
@@ -398,6 +412,20 @@
         <a href="https://blog.naver.com/kt6440" target="_blank" class="fab fab-blog" title="네이버 블로그 문의"><i
                 class="fas fa-blog"></i></a>
     </div>
+
+    <!-- Google Translate Script Setup -->
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ko',
+                includedLanguages: 'ko,en,zh-CN,ja',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
